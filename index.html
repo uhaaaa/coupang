@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coupang join</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    h2 {text-align : center;}
+    p {font-size:14px;}
+    .p1 {font-weight:bold;}
+    .check { color:crimson; display : block;}
+    .input-container {display: -ms-flexbox; display: flex; width: 100%; margin-bottom: 15px;}
+    .icon { padding: 10px; background: lightgrey; color: white; min-width: 50px; text-align: center;}
+    .input-field { width: 100%; padding: 10px; outline: none; border: 2px solid lightgrey;}
+    .input-field:focus { border-bottom: 2px solid dodgerblue;}
+    .btn { background-color: dodgerblue; color: white; padding: 15px 20px; font-weight:bold;
+      border: none; cursor: pointer; width: 100%; opacity: 0.9;}
+    .btn:hover {opacity: 1;}
+    
+    
+    #checkWrap { width: 500px; border: 2px solid lightgrey; margin-bottom: 20px;}
+    .p2{margin:0 20px 20px 20px;}
+    #checkWrap label { display: block; margin: 10px;}
+    #checkWrap label:first-child{font-size : 18px; font-weight:bold;}
+    #checkWrap label input[type="checkbox"] { margin-right: 5px; width: 20px; height: 20px; vertical-align: middle;}
+    #checkWrap label:first-child input[type="checkbox"] { width: 30px; height: 30px;}
+    </style>
+    </head>
+    <body>
+    <form action="index.jsp" method="post" style="max-width:500px; margin:auto">
+      <h2><img src="image/logo_coupang.png" alt="logo"></h2>
+      <p class="p1">회원정보를 입력해주세요</p>
+      
+      <div class="input-container">
+        <i class="fas fa-envelope icon"></i>
+        <input class="input-field email" type="text" placeholder="이메일 (아이디)" name="email" autocomplete="off">
+      </div>
+      <div class="emailcheck check">
+          <p></p>
+      </div>
+      
+      <div class="input-container">
+        <i class="fas fa-unlock icon"></i>
+        <input class="input-field pwd" type="password" placeholder="비밀번호" name="pwd">
+      </div>
+      <div class="pwdcheck1 check">
+          <p></p>
+      </div>
+      
+      <div class="input-container">
+        <i class="fas fa-lock icon"></i>
+        <input class="input-field pwdcheck" type="password" placeholder="비밀번호 확인" name="pwdcheck">
+      </div>
+      <div class="pwdcheck2 check">
+          <p></p>
+      </div>
+      
+      <div class="input-container">
+        <i class="far fa-user icon"></i>
+        <input class="input-field name" type="text" placeholder="이름" name="usrnm" autocomplete="off">
+      </div>
+      <div class="namecheck check">
+          <p></p>
+      </div> 
+     
+      <div class="input-container">
+        <i class="fas fa-mobile-alt icon"></i>
+        <input class="input-field phone" type="text" placeholder="전화번호" name="phone" autocomplete="off">
+      </div>
+      <div class="phonecheck check">
+          <p></p>
+      </div>
+      <hr>
+      <div>
+        <p class="p1">쿠팡 서비스약관에 동의해주세요</p>
+        <div id="checkWrap">
+            <label for="cheeck01"><input type="checkbox" id="cheeck01" />모두 동의합니다.</label>
+            <p class="p2">동의에는 필수 및 선택 목적(광고성 정보 수신 포함)에 대한 동의가 포함되어 있으며, 선택 목적의 동의를 거부하시는 경우에도 서비스 이용이 가능합니다.</p>
+            <label for="cheeck02"><input type="checkbox" id="cheeck02" />[필수] 14세 이상입니다</label>
+            <label for="cheeck03"><input type="checkbox" id="cheeck03" />[필수] 쿠팡 이용약관 동의</label>
+            <label for="cheeck04"><input type="checkbox" id="cheeck04" />[필수] 전자금융거래 이용약관 동의</label>
+            <label for="cheeck05"><input type="checkbox" id="cheeck05" />[필수] 개인정보 이용 및 수집 동의</label>
+            <label for="cheeck06"><input type="checkbox" id="cheeck06" />[필수] 개인정보 제 3자 제공 동의</label>
+            <label for="cheeck07"><input type="checkbox" id="cheeck07" />[선택] 광고성 정보 수신 동의</label>
+        </div>
+      </div>
+     
+      
+      
+      <button type="submit" class="btn">회원가입</button>
+    </form>
+    <script>
+    $('.email').on('blur', function(){
+        var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        var em = $(this).val();
+        if(!regex.test(em) || em == ""){
+            $('.emailcheck > p').text('이메일 형식이 잘못되었습니다.');
+        } else {
+            $('.emailcheck > p').text('');
+            $(this).css('border-bottom', '2px solid dodgerblue');
+        }
+    });
+    
+    $('.pwd').on('blur', function(){
+        if($(this).val() == ""){
+            $('.pwdcheck1 > p').text('비밀번호를 입력해주세요');
+        } else {
+            $('.pwdcheck1 > p').text('');
+            $(this).css('border-bottom', '2px solid dodgerblue');
+        }
+    });
+    
+    $('.pwdcheck').on('blur', function(){
+        if($(this).val() == ""){
+            $('.pwdcheck2 > p').text('비밀번호 확인을 위해 한번 더 입력해주세요');
+        } else if($(this).val() != $('.pwd').val() ){
+            $('.pwdcheck2 > p').text('비밀번호가 일치하지 않습니다.');
+        } else {
+            $('.pwdcheck2 > p').text('');
+            $(this).css('border-bottom', '2px solid dodgerblue');
+        }
+    });
+    
+    $('.name').on('blur', function(){
+        if($(this).val() == ""){
+            $('.namecheck > p').text('이름을 입력해주세요');
+        } else {
+            $('.namecheck > p').text('');
+            $(this).css('border-bottom', '2px solid dodgerblue');
+        }
+    });
+    
+    $('.phone').on('blur', function(){
+        var regex= /^\d{2,3}-\d{3,4}-\d{4}$/;
+        var ph = $(this).val();
+        if(!regex.test(ph) || ph == ""){
+            $('.phonecheck > p').text('전화번호 형식이 잘못되었습니다.');
+        } else {
+            $('.phonecheck > p').text('');
+            $(this).css('border-bottom', '2px solid dodgerblue');
+        }
+    });
+    
+    window.onload = function(){
+        var checkWrap = document.getElementById('checkWrap'),
+            check = checkWrap.getElementsByTagName('input');
+        checkWrap.addEventListener('click', function(e){
+            var target = e.target,
+                checkNum = 0;
+            if(target === check[0]){
+                if(target.checked){
+                    for(var i = 1;i < check.length;i++){
+                        check[i].checked = true;
+                    };
+                }else{
+                    for(var i = 1;i < check.length;i++){
+                        check[i].checked = false;
+                    };
+                };
+            }else{
+                for(var i = 1;i < check.length;i++){
+                    if(check[i].checked){
+                        checkNum++;
+                    };
+                };
+                if(checkNum >= check.length - 1){
+                    check[0].checked = true;
+                }else{
+                    check[0].checked = false;
+                };
+            };
+        });
+    };
+    
+    </script>
+    </body>
+</html>
